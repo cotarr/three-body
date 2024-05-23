@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Three-body</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="./js/main.js"></script>
+</head>
+
+<body>
+  <div class="grid-wrapper">
+    <div id="chartContainer" class="grid-box11 chart-div" >
+      <canvas id='canvasElementId'></canvas>
+    </div>
+  </div>
+
+  <div class="button-div">
+    <span>Presets:</span>
+    <button id="button0Id" class="button">Button0</button>
+    <button id="button1Id" class="button">Button1</button>
+    <button id="button2Id" class="button">Button2</button>
+    <button id="button3Id" class="button">Button3</button>
+    <button id="button4Id" class="button">Button4</button>
+    <button id="button5Id" class="button">Button5</button>
+    <button id="button6Id" class="button">Button6</button>
+    <button id="button7Id" class="button">Button7</button>
+  </div>
+
+  <div id="pausedDiv" class="paused-div">
+    <div>
+      <span class="paused-span">Paused</span>
+      <button id="resumeButton">Resume</button>
+    </div>
+    <div class="vh10"></div>
+    <div>
+      Click on graphic to pause simulation<br>
+      and view data in browser console.
+    </div>
+  </div>
+</body>
+</html>

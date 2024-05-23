@@ -1,0 +1,52 @@
+html {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+body {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 10px;
+  background-color: #aaaaaa;
+}
+.button-div {
+  margin-top: 0px;
+}
+.button {
+  margin-top: 5px;
+}
+.grid-wrapper {
+  display: grid;
+  margin-top: 10px;
+}
+.grid-box11 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+.grid-box12 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+.chart-container {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.vh10 {
+  height: 10px;
+}
+.paused-span {
+  color: red;
+  font-size: 240%;
+  padding-right: 30px;
+}
+.paused-div {
+  position: fixed;
+  top: 40px;
+  left: 40px;
+  width: auto;
+  z-index: 5;
+  border: 1px solid red;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: white;
+}
