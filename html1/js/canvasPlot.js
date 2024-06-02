@@ -44,8 +44,8 @@ let pixelPerUnit = null;
 
 /**
  * Define reserved space on page when auto-sizing the canvas element
- * @param {number} rightOffset reserved area to right of canvas (width in pixels) 
- * @param {number} bottomOffset  reserved area at bottom of canvas (height in pixels) 
+ * @param {number} rightOffset reserved area to right of canvas (width in pixels)
+ * @param {number} bottomOffset  reserved area at bottom of canvas (height in pixels)
  */
 export const setCanvasMarginsPx = (options) => {
   if (options) {
@@ -69,8 +69,8 @@ export const getBounds = () => {
     coordMaxX,
     coordMinY,
     coordMaxY
-  }
-}
+  };
+};
 
 /**
  * Plot 1 pixel on the browser canvas using canvas coordinates
@@ -87,7 +87,7 @@ export const plotPixel = (x, y, color) => {
   ctx.lineTo(x + 1, y);
   ctx.stroke();
   ctx.restore();
-}
+};
 
 /**
  * Plot 1 pixel on the browser canvas using calculation X-Y coordinates
@@ -96,15 +96,15 @@ export const plotPixel = (x, y, color) => {
  * @param {*} color - String in format '#ffffff'
  */
 export const plotCoord = (coordX, coordY, color) => {
-  let x = originPxX + (coordX * pixelPerUnit);
-  let y = originPxY - (coordY * pixelPerUnit);
+  const x = originPxX + (coordX * pixelPerUnit);
+  const y = originPxY - (coordY * pixelPerUnit);
 
-  if ((x >= 0) && (x <canvasWidthPx) && (y >= 0) && (y < canvasHeightPx)) {
+  if ((x >= 0) && (x < canvasWidthPx) && (y >= 0) && (y < canvasHeightPx)) {
     plotPixel(x, y, color);
   } else {
     // console.log('plotCoord: Out of range', coordX, coordY);
-  }
-}
+  };
+};
 
 /**
  * Initialize the browser canvas
@@ -126,7 +126,7 @@ export const initCanvas = () => {
     coordMaxY = 100;
     originPxX = Math.floor(canvasWidthPx / 2);
     originPxY = Math.floor(canvasHeightPx / 2);
-    pixelPerUnit = canvasHeightPx / (coordMaxY-coordMinY);
+    pixelPerUnit = canvasHeightPx / (coordMaxY - coordMinY);
     coordMinX = Math.floor(-100 - (((canvasWidthPx - canvasHeightPx) / pixelPerUnit) / 4));
     coordMaxX = Math.floor(100 + (((canvasWidthPx - canvasHeightPx) / pixelPerUnit) / 4));
   } else {
@@ -134,7 +134,7 @@ export const initCanvas = () => {
     coordMaxX = 100;
     originPxX = Math.floor(canvasWidthPx / 2);
     originPxY = Math.floor(canvasHeightPx / 2);
-    pixelPerUnit = canvasWidthPx / (coordMaxX-coordMinX);
+    pixelPerUnit = canvasWidthPx / (coordMaxX - coordMinX);
     coordMinY = Math.floor(-100 - (((canvasHeightPx - canvasWidthPx) / pixelPerUnit) / 4));
     coordMaxY = Math.floor(100 + (((canvasHeightPx - canvasWidthPx) / pixelPerUnit) / 4));
   }
@@ -152,6 +152,6 @@ export const initCanvas = () => {
 
   // 0, 0, W, H
   ctx.fillRect(0, 0, canvasWidthPx, canvasHeightPx);
-}
+};
 
 export default initCanvas;

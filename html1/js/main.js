@@ -4,16 +4,16 @@ import { initCanvas, plotCoord, setCanvasMarginsPx, getBounds } from './canvasPl
 import presets from './presets.js';
 
 /** @type {number} Gravitational Constant in m^3 / (kg * s^2) */
-const gravitationalConstant = 6.674e-11
+const gravitationalConstant = 6.674e-11;
 
 /** @type {number} Integration step size in seconds */
 const stepSeconds = 10;
 /** @type {number} Counter of number integration steps per plotted point */
 const stepPerPoint = 100;
-/** @type {number} The setInterval() timer period in milliseconds*/
+/** @type {number} The setInterval() timer period in milliseconds */
 const IntervalTimerMilliSeconds = 10;
 
-/** @type {number} Ad-hoc display scale factor to span -100 to +100 coordinate space*/
+/** @type {number} Ad-hoc display scale factor to span -100 to +100 coordinate space */
 const displayScaleFactor = 1e7;
 
 /** @type {boolean} Flag used to pause simulation */
@@ -58,7 +58,7 @@ for (let i = 0; i < presets.length; i++) {
 //   position: meters
 //   velocity: meters/second
 //   acceleration: meters/(second^2)
-//   force: Newtons, kg-m/(s^2) 
+//   force: Newtons, kg-m/(s^2)
 //
 
 /**
@@ -69,13 +69,12 @@ for (let i = 0; i < presets.length; i++) {
  * @returns {object} Returns object contains force vector in Newtons
  */
 const calcForceVector = (indexSelf, indexRemote) => {
-
   const deltaX = masses[indexRemote].positionX - masses[indexSelf].positionX;
   const deltaY = masses[indexRemote].positionY - masses[indexSelf].positionY;
 
   // distance = sqrt(x^2 + y^2)
   const distance = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
-  const scalerForce = gravitationalConstant * 
+  const scalerForce = gravitationalConstant *
     masses[indexSelf].mass * masses[indexRemote].mass /
     (distance * distance);
   const forceX = scalerForce * deltaX / distance;
@@ -98,28 +97,28 @@ const calcForceVector = (indexSelf, indexRemote) => {
 const combineAccelerationVectors = (indexSelf) => {
   let indexOne;
   let indexTwo;
-  if (indexSelf == 0) {
+  if (indexSelf === 0) {
     indexOne = 1;
     indexTwo = 2;
   }
-  if (indexSelf == 1) {
+  if (indexSelf === 1) {
     indexOne = 0;
     indexTwo = 2;
   }
-  if (indexSelf == 2) {
+  if (indexSelf === 2) {
     indexOne = 0;
     indexTwo = 1;
   }
   const forceOne = calcForceVector(indexSelf, indexOne);
   const forceTwo = calcForceVector(indexSelf, indexTwo);
   // F = M * a,  therefore a = F / M
-  const accelerationX = (forceOne.forceX + forceTwo.forceX) / masses[indexSelf].mass ;
-  const accelerationY = (forceOne.forceY + forceTwo.forceY) / masses[indexSelf].mass ;
+  const accelerationX = (forceOne.forceX + forceTwo.forceX) / masses[indexSelf].mass;
+  const accelerationY = (forceOne.forceY + forceTwo.forceY) / masses[indexSelf].mass;
   return {
     accelerationX,
     accelerationY
   };
-}
+};
 // console.log(JSON.stringify(combineAccelerationVectors(0), null, 2));
 
 /**
@@ -135,10 +134,9 @@ const updateAcceleration = () => {
   masses[1].accelerationY = accelOne.accelerationY;
   masses[2].accelerationX = accelTwo.accelerationX;
   masses[2].accelerationY = accelTwo.accelerationY;
-}
+};
 // updateAcceleration();
 // console.log(JSON.stringify(masses, null, 2));
-
 
 /**
  * Advance time by one time increment.
@@ -155,16 +153,20 @@ const advanceTime = () => {
     masses[i].positionX += masses[i].velocityX * stepSeconds;
     masses[i].positionY += masses[i].velocityY * stepSeconds;
   }
-  // console.log('Velocity-one', Math.sqrt((masses[1].velocityX * masses[1].velocityX) + (masses[1].velocityY * masses[1].velocityY)));
+  // console.log('Velocity-one', Math.sqrt((masses[1].velocityX * masses[1].velocityX) +
+  //    (masses[1].velocityY * masses[1].velocityY)));
 };
 
 /**
  * Plot x-y position on the browser canvas
  */
 const plotPoints = () => {
-  plotCoord(masses[0].positionX / displayScaleFactor, masses[0].positionY / displayScaleFactor, '#ffffff');
-  plotCoord(masses[1].positionX / displayScaleFactor, masses[1].positionY / displayScaleFactor, '#ff0000');
-  plotCoord(masses[2].positionX / displayScaleFactor, masses[2].positionY / displayScaleFactor, '#00ff00');
+  plotCoord(masses[0].positionX / displayScaleFactor,
+    masses[0].positionY / displayScaleFactor, '#ffffff');
+  plotCoord(masses[1].positionX / displayScaleFactor,
+    masses[1].positionY / displayScaleFactor, '#ff0000');
+  plotCoord(masses[2].positionX / displayScaleFactor,
+    masses[2].positionY / displayScaleFactor, '#00ff00');
 };
 
 // ---------------------------------------
@@ -223,7 +225,7 @@ const _setPresetFromIndex = (index) => {
   masses[2].accelerationY = null;
 
   resumeSimulation();
-}
+};
 
 //
 // Preset Buttons
@@ -261,9 +263,9 @@ document.getElementById('resumeButton').addEventListener('click', () => {
 // Click anywhere on the canvas area to pause or resume.
 document.getElementById('chartContainer').addEventListener('click', () => {
   if (paused) {
-    resumeSimulation()
+    resumeSimulation();
   } else {
-    pauseSimulation()
+    pauseSimulation();
   }
 });
 
@@ -294,7 +296,7 @@ setInterval(() => {
     plotPoints();
     busy = false;
   } else {
-    console.log('timer tick before previous was completed.')
+    console.log('timer tick before previous was completed.');
   }
 }, IntervalTimerMilliSeconds);
 
@@ -306,6 +308,6 @@ setInterval(() => {
     autoPauseTimer++;
     if (autoPauseTimer > 60) {
       pauseSimulation();
-    }    
+    }
   }
 }, 1000);
